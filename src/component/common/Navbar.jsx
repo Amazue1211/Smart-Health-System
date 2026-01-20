@@ -1,12 +1,13 @@
 import React from 'react';
 import Notification from '../../Pages/Notification';
 import { Link } from 'react-router-dom';
+import img from '../../assets/john.webp';
 
 function Navbar() {
   const userInfo = {
     firstName: 'chima',
     secondName: 'amazue',
-    // profileImage: img,
+     profileImage: {img},
     matricNo: '22010306022',
   };
 
