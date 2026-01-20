@@ -59,7 +59,7 @@ function Notification() {
             >
               <div className='flex justify-between items-start p-[10px]'>
                 <div>
-                  <h2 className='text-xl font-bold'>{notification.title}</h2>
+                 <div className='flex'> <h2 className='text-xl font-bold'>{notification.title}</h2> <div className='bg-green-600 rounded-full h-[7px] w-[7px]'></div></div>
                   <p className='text-[15px]'>{notification.body}</p>
                   <span className='text-sm text-red-600'>{notification.time}</span>
                 </div>
