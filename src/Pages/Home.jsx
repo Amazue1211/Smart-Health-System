@@ -12,9 +12,56 @@ import {
   RefreshCw,
   Activity,
   Heart,
+  Video,
+  MapPin,
+  Clock,
+  User,
+  History,
 } from 'lucide-react';
 
 const HealthCareDashboard = () => {
+  // Upcoming appointments data
+  const upcomingAppointments = [
+    {
+      id: 1,
+      doctor: 'Dr. Sarah Johnson',
+      specialty: 'Cardiology',
+      date: 'Thu, Sep 4',
+      time: '10:30',
+      location: 'Heart Care Center',
+      type: 'Consultation',
+      note: 'Regular checkup - bring previous test results',
+      joinLink: '#',
+      directionsLink: '#',
+    },
+    {
+      id: 2,
+      doctor: 'Dr. Emily Rodriguez',
+      specialty: 'Pediatrics',
+      date: 'Sat, Sep 6',
+      time: '14:00',
+      location: "Children's Medical Center",
+      type: 'Checkup',
+      note: '',
+      joinLink: '#',
+      directionsLink: '#',
+    },
+  ];
+
+  // Recent appointments data (completed)
+  const recentAppointments = [
+    {
+      id: 1,
+      doctor: 'Dr. Michael Chen',
+      specialty: 'Neurology',
+      date: 'Thu, Aug 28',
+      time: '09:00',
+      location: 'Neurological Institute',
+      type: 'Consultation',
+      completed: true,
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
@@ -65,7 +112,7 @@ const HealthCareDashboard = () => {
             </div>
             <div className="mb-2">
               <p className="text-slate-500 text-sm font-medium">Upcoming Appointments</p>
-              <p className="text-4xl font-bold text-slate-800 mt-1">2</p>
+              <p className="text-4xl font-bold text-slate-800 mt-1">{upcomingAppointments.length}</p>
               <p className="text-sm text-slate-500 mt-0.5">Next 30 days</p>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-slate-400 border-t border-slate-100 pt-3 mt-2">
@@ -84,7 +131,7 @@ const HealthCareDashboard = () => {
             </div>
             <div className="mb-2">
               <p className="text-slate-500 text-sm font-medium">Completed Visits</p>
-              <p className="text-4xl font-bold text-slate-800 mt-1">1</p>
+              <p className="text-4xl font-bold text-slate-800 mt-1">{recentAppointments.length}</p>
               <p className="text-sm text-slate-500 mt-0.5">This year</p>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-slate-400 border-t border-slate-100 pt-3 mt-2">
@@ -103,7 +150,9 @@ const HealthCareDashboard = () => {
             </div>
             <div className="mb-2">
               <p className="text-slate-500 text-sm font-medium">Total Appointments</p>
-              <p className="text-4xl font-bold text-slate-800 mt-1">3</p>
+              <p className="text-4xl font-bold text-slate-800 mt-1">
+                {upcomingAppointments.length + recentAppointments.length}
+              </p>
               <p className="text-sm text-slate-500 mt-0.5">All time</p>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-slate-400 border-t border-slate-100 pt-3 mt-2">
@@ -135,6 +184,133 @@ const HealthCareDashboard = () => {
           </div>
         </div>
 
+        {/* Upcoming Appointments List Section */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+              <CalendarDays className="h-5 w-5 text-blue-600" />
+              Upcoming Appointments
+            </h3>
+            <button className="text-sm text-blue-600 font-medium hover:text-blue-700 transition">
+              View all
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {upcomingAppointments.map((appt) => (
+              <div
+                key={appt.id}
+                className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300"
+              >
+                <div className="p-5">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h4 className="text-lg font-bold text-slate-800">{appt.doctor}</h4>
+                      <div className="flex items-center gap-1 text-sm text-blue-600 font-medium mt-0.5">
+                        <Stethoscope className="h-3.5 w-3.5" />
+                        <span>{appt.specialty}</span>
+                      </div>
+                    </div>
+                    <div className="bg-blue-50 rounded-full px-3 py-1 text-xs font-semibold text-blue-700">
+                      {appt.type}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 mt-3">
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <CalendarDays className="h-4 w-4 text-slate-400" />
+                      <span className="text-sm">{appt.date}</span>
+                      <Clock className="h-4 w-4 text-slate-400 ml-2" />
+                      <span className="text-sm font-medium">{appt.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <MapPin className="h-4 w-4 text-slate-400" />
+                      <span className="text-sm">{appt.location}</span>
+                    </div>
+                    {appt.note && (
+                      <div className="mt-2 bg-slate-50 p-2 rounded-lg text-sm text-slate-600 border-l-2 border-blue-200">
+                        {appt.note}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex gap-3 mt-5 pt-2 border-t border-slate-100">
+                    <button className="flex-1 inline-flex items-center justify-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium py-2.5 px-3 rounded-xl transition-colors duration-200 text-sm">
+                      <Video className="h-4 w-4" />
+                      Join Call
+                    </button>
+                    <button className="flex-1 inline-flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium py-2.5 px-3 rounded-xl transition-colors duration-200 text-sm">
+                      <MapPin className="h-4 w-4" />
+                      Directions
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Recent Appointments Section */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+              <History className="h-5 w-5 text-emerald-600" />
+              Recent Appointments
+            </h3>
+            <button className="text-sm text-blue-600 font-medium hover:text-blue-700 transition">
+              View all
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {recentAppointments.map((appt) => (
+              <div
+                key={appt.id}
+                className="bg-white/80 rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300"
+              >
+                <div className="p-5">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h4 className="text-lg font-bold text-slate-800">{appt.doctor}</h4>
+                      <div className="flex items-center gap-1 text-sm text-emerald-600 font-medium mt-0.5">
+                        <Stethoscope className="h-3.5 w-3.5" />
+                        <span>{appt.specialty}</span>
+                      </div>
+                    </div>
+                    <div className="bg-emerald-50 rounded-full px-3 py-1 text-xs font-semibold text-emerald-700">
+                      Completed
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 mt-3">
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <CalendarDays className="h-4 w-4 text-slate-400" />
+                      <span className="text-sm">{appt.date}</span>
+                      <Clock className="h-4 w-4 text-slate-400 ml-2" />
+                      <span className="text-sm font-medium">{appt.time}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <MapPin className="h-4 w-4 text-slate-400" />
+                      <span className="text-sm">{appt.location}</span>
+                    </div>
+                    <div className="mt-2 flex items-center gap-2 text-slate-500 text-sm">
+                      <User className="h-4 w-4 text-slate-400" />
+                      <span>{appt.type}</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-5 pt-2 border-t border-slate-100">
+                    <button className="w-full inline-flex items-center justify-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium py-2.5 px-3 rounded-xl transition-colors duration-200 text-sm">
+                      <FileText className="h-4 w-4" />
+                      View Summary
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Quick Action Buttons */}
         <div className="mb-6">
           <h3 className="text-lg font-semibold text-slate-700 mb-4 flex items-center gap-2">
@@ -161,7 +337,7 @@ const HealthCareDashboard = () => {
           </div>
         </div>
 
-        {/* Optional Decorative Note - mimics live update status */}
+        {/* Footer Status */}
         <div className="mt-8 text-center text-xs text-slate-400 flex items-center justify-center gap-1 border-t border-slate-100 pt-6">
           <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
           <span>All health data is secure & encrypted • Real-time sync</span>
