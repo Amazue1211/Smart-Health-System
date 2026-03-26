@@ -340,7 +340,7 @@ const HealthCareDashboard = () => {
         {/* Footer Status */}
         <div className="mt-8 text-center text-xs text-slate-400 flex items-center justify-center gap-1 border-t border-slate-100 pt-6">
           <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-          <span>All health data is secure & encrypted • Real-time sync</span>
+          <span>All health data is secure & encrypted • Real-time sync in </span>
         </div>
       </div>
     </div>
