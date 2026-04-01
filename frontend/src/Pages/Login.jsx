@@ -94,6 +94,9 @@ className='mt-[100px] '
 <br />
         <button type='submit' className='bg-[#3566bb] cursor-[pointer] w-[320px] h-[50px] mt-[20px] rounded-[10px] mt-[10px] text-white font-bold'>
             Login
+        </button> <br />
+         <button type='submit' className='bg-[#3566bb] cursor-[pointer] w-[320px] h-[50px] mt-[20px] rounded-[10px] mt-[10px] text-white font-bold'>
+       Sign up
         </button>
 </form>
 
