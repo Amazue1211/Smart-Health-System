@@ -20,13 +20,16 @@ const validate = values => {
 
     if(!values.password){
         errors.password = "Required"
-    }else if(values.password.length < 8 || !values.password.includes(values.password[0].toUpperCase())){
+    }else if(values.password.length < 8 ){
         errors.password = "Invalid password"
-    }else ( !values.password.includes(values.password[0].toUpperCase())){
-        errors.password = "Password must contain at least one uppercase letter"
-    }
+    }if (values.password.length > 0 && !/[A-Z]/.test(values.password)) {
+  errors.password = "Password must contain at least one uppercase letter";
+}
 
-    if(values.password !== values.confirmpassword){
+    if(!values.confirmpassword){
+        errors.confirmpassword = "Required"
+    }
+    else if(values.password !== values.confirmpassword){
         errors.confirmpassword = "Passwords do not match"
     }
     return errors
