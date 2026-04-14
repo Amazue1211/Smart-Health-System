@@ -5,10 +5,10 @@ const initialValues  = {
     email : "",
     password : ""
 }
-const user = {
-  email: "amazue@gmail.com",
-  password: "chima12345"
-}
+// const user = {
+//   email: "amazue@gmail.com",
+//   password: "chima12345"
+// }
 
 const validate = values => {
     const errors = {}
@@ -36,13 +36,13 @@ function Login() {
     const formik = useFormik({
     initialValues,
     validate,
-    onSubmit: values => {
-      if (values.email === user.email && values.password === user.password) {
-        alert("Welcome!")
-      } else {
-        alert("Invalid credentials")
-      }
-    }
+    // onSubmit: values => {
+    //   if (values.email === user.email && values.password === user.password) {
+    //     alert("Welcome!")
+    //   } else {
+    //     alert("Invalid credentials")
+    //   }
+    // }
   })
   return (
     <div className='flex center justify-center'>
