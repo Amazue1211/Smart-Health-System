@@ -23,7 +23,7 @@ function App() {
 
         <Router>
   <Routes>
-   <Route index element={<Home/>}/>
+   <Route index element={<Login/>}/>
    <Route path='notification' element = {<Notification />} />
      <Route path='login' element = {<Login />} />
      <Route path='patientbookappointment' element = {<PatientBookAppointment />} />
